@@ -1,5 +1,5 @@
 <html><head>
-    <title>W3.CSS Template</title>
+    <title>Theerachot Laothep</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -49,6 +49,9 @@
         min-height: 400px;
       }
     }
+    #cryptoPrice {
+      font-size: 20px;
+    }
     </style>
     </head>
     <body>
@@ -86,15 +89,28 @@
     
     <!-- Container (About Section) -->
     <div class="w3-content w3-container w3-padding-64" id="about">
-      <h3 class="w3-center">Javascript</h3>
+      <h3 class="w3-center">Javascript & API</h3>
       <p class="w3-center"><em>Theerachot Laothep</em></p>
-      <h2>Just change A - Z</h2>
-      <p id="demo">Hi</p>
+      <h2>TruncateLength</h2>
+      <form id="truncateForm">
+        <label for="inputText">Enter text:</label>
+        <input type="text" id="inputText" required>
+        <label for="truncateLength">Truncate length:</label>
+        <input type="number" id="truncateLength" min="0" required>
+        <button type="submit">Truncate</button>
+      </form>
+      <p id="tta"></p>
       <hr>
 
-<h2>Click to change</h2>
-<p id="demo2">Hi</p>
-<button onclick="myFunction()">Click me</button>
+<h2>Day to Second</h2>
+      <form id="daysForm">
+        <label for="daysInput">Enter days:</label>
+        <input type="number" id="daysInput" min="0" required>
+        <button type="submit">Convert</button>
+      </form>
+    
+      <p id="result"></p>
+    
 
 <hr>
 <h2>Calculate number</h2>
@@ -151,11 +167,28 @@
   <hr>
   <div>
     <h2>
-      Get Random Dog Image
+      getRandomImage
     </h2>
-    <button id="getRandomDog">Get Random Dog Image</button>
-    <img id="dogImage" alt="Random Dog Image">
+    <button id="getRandomImage">Get Random Image</button>
+    <img id="randomImage" alt="Random Image">
   </div>
+  <hr>
+  <h2>
+    Nationalize API Demo
+  </h2>
+  <label for="nameInput">Enter Name:</label>
+  <input type="text" id="nameInput" placeholder="Enter a name">
+
+  <button id="getAgify">Get Agify</button>
+  <button id="getGenderize">Get Genderize</button>
+  <button id="getNationalize">Get Nationalize</button>
+
+  <div id="result"></div>
+  <hr>
+
+  <p id="cryptoPrice"></p>
+
+
 
 
       <div class="w3-row">
@@ -230,21 +263,6 @@
             <i class="fa fa-phone fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i> Phone: 0886860776<br>
             <i class="fa fa-envelope fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i> Email: theerachot.la@rmuti.ac.th<br>
           </div>
-          <p>Swing by for a cup of <i class="fa fa-coffee"></i>, or leave me a note:</p>
-          <form action="/action_page.php" target="_blank">
-            <div class="w3-row-padding" style="margin:0 -16px 8px -16px">
-              <div class="w3-half">
-                <input class="w3-input w3-border" type="text" placeholder="Name" required="" name="Name">
-              </div>
-              <div class="w3-half">
-                <input class="w3-input w3-border" type="text" placeholder="Email" required="" name="Email">
-              </div>
-            </div>
-            <input class="w3-input w3-border" type="text" placeholder="Message" required="" name="Message">
-            <button class="w3-button w3-black w3-right w3-section" type="submit">
-              <i class="fa fa-paper-plane"></i> SEND MESSAGE
-            </button>
-          </form>
         </div>
       </div>
     </div>
@@ -252,19 +270,15 @@
     <!-- Footer -->
     <footer class="w3-center w3-black w3-padding-64 w3-opacity w3-hover-opacity-off">
       <a href="#home" class="w3-button w3-light-grey"><i class="fa fa-arrow-up w3-margin-right"></i>To the top</a>
-      <div class="w3-xlarge w3-section">
-        <i class="fa fa-facebook-official w3-hover-opacity"></i>
-        <i class="fa fa-instagram w3-hover-opacity"></i>
-        <i class="fa fa-snapchat w3-hover-opacity"></i>
-        <i class="fa fa-pinterest-p w3-hover-opacity"></i>
-        <i class="fa fa-twitter w3-hover-opacity"></i>
-        <i class="fa fa-linkedin w3-hover-opacity"></i>
-      </div>
-      <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-text-green">w3.css</a></p>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     
+
+
+
+
+
     <script>
     // Modal Image Gallery
     function onClick(element) {
@@ -294,27 +308,58 @@
             x.className = x.className.replace(" w3-show", "");
         }
     }
+    function truncate(str, length) {
+      if (str.length > length) {
+        return str.slice(0, length) + '...';
+      } else {
+        return str;
+      }
+    }
 
-        //document.getElementById("demo").innerHTML = "Hello World";
-  
-        function printAlphabets() {
-    // สร้างตัวแปรเพื่อเก็บตัวอักษร A-Z
-    const alphabets = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  
-    // ใช้ forEach เพื่อวนลูปผ่านทุกตัวอักษร
-    alphabets.split('').forEach((alphabet, index) => {
-      // ใช้ setTimeout เพื่อกำหนดระยะเวลาการแสดงผล
-      setTimeout(() => {
-        document.getElementById("demo").innerHTML = alphabet;
-        console.log(alphabet);
-      }, index * 1000); // 1000 milliseconds = 1 วินาที
+    const truncateForm = document.getElementById('truncateForm');
+    const Element = document.getElementById('tta');
+
+    truncateForm.addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      const inputText = document.getElementById('inputText');
+      const truncateLength = document.getElementById('truncateLength');
+
+      const textValue = inputText.value;
+      const lengthValue = parseInt(truncateLength.value);
+
+      if (!isNaN(lengthValue) && lengthValue >= 0) {
+        const result = truncate(textValue, lengthValue);
+        Element.textContent = `Result: ${result}`;
+      } else {
+        Element.textContent = 'Please enter a valid truncate length.';
+      }
     });
-  }
-  printAlphabets();
-  
-    function myFunction() {
-      document.getElementById("demo2").innerHTML = "Hello World";
-  }
+
+  function daysToSeconds(days) {
+      const secondsInMinute = 60;
+      const minutesInHour = 60;
+      const hoursInDay = 24;
+      const seconds = days * hoursInDay * minutesInHour * secondsInMinute;
+      return seconds;
+    }
+
+    const daysForm = document.getElementById('daysForm');
+    const resultElement = document.getElementById('result');
+
+    daysForm.addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      const daysInput = document.getElementById('daysInput');
+      const days = parseFloat(daysInput.value);
+
+      if (!isNaN(days)) {
+        const seconds = daysToSeconds(days);
+        resultElement.textContent = `${days} days is equal to ${seconds} seconds.`;
+      } else {
+        resultElement.textContent = 'Please enter a valid number of days.';
+      }
+    });
   
     function myFunction2() {
     // Get the value of the input field with id="numb"
@@ -416,28 +461,115 @@ document.addEventListener('DOMContentLoaded', function() {
           .catch(error => console.error('Error fetching data:', error));
   });
 
-  const getRandomDogButton = document.getElementById('getRandomDog');
-    const dogImage = document.getElementById('dogImage');
+    const getRandomImageButton = document.getElementById('getRandomImage');
+    const randomImage = document.getElementById('randomImage');
 
-    getRandomDogButton.addEventListener('click', () => {
-      getRandomDogImage();
+    getRandomImageButton.addEventListener('click', () => {
+      getRandomImage();
     });
 
-    function getRandomDogImage() {
-      fetch('https://dog.ceo/api/breeds/image/random')
-        .then(response => response.json())
-        .then(data => {
-          if (data.status === 'success') {
-            const imageUrl = data.message;
-            dogImage.src = imageUrl;
-          } else {
-            console.error('Error fetching dog image:', data.message);
+    function getRandomImage() {
+      // ตัวอย่าง API สำหรับรูปภาพสุ่ม (ในที่นี้ใช้ Picsum)
+      fetch('https://picsum.photos/200/300')
+        .then(response => {
+          // กรณีต้องการใช้ API อื่น ๆ ท่านต้องแก้ URL ให้เป็น URL ของ API นั้น
+          // ตรงนี้เป็นตัวอย่างเท่านั้น
+          if (!response.ok) {
+            throw new Error('Failed to fetch image');
           }
+          return response.blob();
+        })
+        .then(blob => {
+          // แปลง Blob เป็น URL ของรูปภาพ
+          const imageUrl = URL.createObjectURL(blob);
+          randomImage.src = imageUrl;
         })
         .catch(error => {
           console.error('Error:', error);
         });
     }
+ 
+
+
+    const nameInput = document.getElementById('nameInput');
+    const getAgifyButton = document.getElementById('getAgify');
+    const getGenderizeButton = document.getElementById('getGenderize');
+    const getNationalizeButton = document.getElementById('getNationalize');
+    const resultContainer = document.getElementById('result');
+
+    getAgifyButton.addEventListener('click', () => {
+      getResult('https://api.agify.io', 'agify');
+    });
+
+    getGenderizeButton.addEventListener('click', () => {
+      getResult('https://api.genderize.io', 'genderize');
+    });
+
+    getNationalizeButton.addEventListener('click', () => {
+      getResult('https://api.nationalize.io', 'nationalize');
+    });
+
+    function getResult(apiUrl, endpoint) {
+      const name = nameInput.value;
+
+      if (!name) {
+        alert('Please enter a name');
+        return;
+      }
+
+      const apiEndpoint = `${apiUrl}?name=${name}`;
+
+      fetch(apiEndpoint)
+        .then(response => response.json())
+        .then(data => {
+          displayResult(endpoint, data);
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+    }
+
+    function displayResult(endpoint, data) {
+      let resultHtml = `<p>Result from ${endpoint}:</p>`;
+
+      switch (endpoint) {
+        case 'agify':
+          resultHtml += `<p>Estimated age: ${data.age}</p>`;
+          break;
+        case 'genderize':
+          resultHtml += `<p>Gender: ${data.gender}</p>`;
+          break;
+        case 'nationalize':
+          const countries = data.country.map(item => `${item.country_id} (${item.probability}%)`);
+          resultHtml += `<p>Nationalities: ${countries.join(', ')}</p>`;
+          break;
+        default:
+          break;
+      }
+
+      resultContainer.innerHTML = resultHtml;
+    }
+    function fetchCryptoPrice() {
+      fetch('https://api.coinbase.com/v2/exchange-rates?currency=BTC')
+        .then(response => response.json())
+        .then(data => {
+          const currentTime = new Date();
+          const formattedTime = currentTime.toLocaleTimeString();
+          const cryptoPrice = data.data.rates.USD; // ราคา BTC เทียบกับ USD
+          const displayText = `BTC to USD: ${cryptoPrice} (Updated at ${formattedTime})`;
+
+          document.getElementById('cryptoPrice').textContent = displayText;
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+    }
+
+    // เรียก API เมื่อโหลดหน้าเว็บครั้งแรก
+    fetchCryptoPrice();
+
+    // เรียก API ทุก 30 วินาที
+    setInterval(fetchCryptoPrice, 30000);
 </script>
 
 
