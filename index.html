@@ -114,25 +114,33 @@
 
 <hr>
 <h2>Calculate number</h2>
-<input id="numb">
-<button type="button" onclick="myFunction2()">Submit</button>
-<p id="demo3"></p>
+<form id="calculatorForm">
+  <label for="num1">Number 1:</label>
+  <input type="number" id="num1" required>
+
+  <label for="num2">Number 2:</label>
+  <input type="number" id="num2" required>
+
+  <button type="button" onclick="calculate()">Calculate</button>
+
+  <label for="result">Result:</label>
+  <input type="text" id="r" readonly>
+</form>
+
 <hr>
-<h2>ความยาวเส้นทแยงมุมคือ</h2>
-<div>
+
+<h2>
+  Diagonal length</h2>
     <label for="height">ความสูง:</label>
     <input type="number" id="height" placeholder="ป้อนความสูง">
-  </div>
-
-  <div>
     <label for="width">ความยาว:</label>
     <input type="number" id="width" placeholder="ป้อนความยาว">
-  </div>
-
   <button onclick="calculateDiagonal()">คำนวณ</button>
-
   <div id="result-container"></div>
+
   <hr>
+
+  <h2>Temperature</h2>
   <form id="converterForm">
     <label for="fahrenheitInput">Enter Fahrenheit Temperature:</label>
     <input type="text" id="fahrenheitInput" name="fahrenheitInput" placeholder="Enter temperature">
@@ -183,11 +191,11 @@
   <button id="getGenderize">Get Genderize</button>
   <button id="getNationalize">Get Nationalize</button>
 
-  <div id="result"></div>
+  <div id="resu"></div>
   <hr>
-
+<h2>CryptoPrice</h2>
   <p id="cryptoPrice"></p>
-
+  <hr>
 
 
 
@@ -262,6 +270,7 @@
             <i class="fa fa-map-marker fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i> khon kaen<br>
             <i class="fa fa-phone fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i> Phone: 0886860776<br>
             <i class="fa fa-envelope fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i> Email: theerachot.la@rmuti.ac.th<br>
+            <i class="fa fa-envelope fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i> facebook: Tai Theerachot<br>
           </div>
         </div>
       </div>
@@ -361,22 +370,22 @@
       }
     });
   
-    function myFunction2() {
-    // Get the value of the input field with id="numb"
-    let x = document.getElementById("numb").value;
-    // If x is Not a Number or less than one or greater than 10
-    let text;
-    if (isNaN(x) || x < 1 || x > 10) {
-      text = "Input not valid";
-    } else {
-      text = "Input OK";
+    function calculate() {
+      const num1 = parseFloat(document.getElementById('num1').value);
+      const num2 = parseFloat(document.getElementById('num2').value);
+
+      if (!isNaN(num1) && !isNaN(num2)) {
+        const result = num1 + num2; // ในที่นี้ใช้การบวกเป็นตัวอย่าง
+        document.getElementById('r').value = result;
+      } else {
+        document.getElementById('r').value = 'Invalid input';
+      }
     }
-    document.getElementById("demo3").innerHTML = text;
-  }
   
   function findDiagonalLength(width, height) {
       return Math.sqrt(Math.pow(width, 2) + Math.pow(height, 2));
     }
+
 
     function calculateDiagonal() {
       const heightInput = document.getElementById('height');
@@ -495,7 +504,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const getAgifyButton = document.getElementById('getAgify');
     const getGenderizeButton = document.getElementById('getGenderize');
     const getNationalizeButton = document.getElementById('getNationalize');
-    const resultContainer = document.getElementById('result');
+    const resultContainer = document.getElementById('resu');
 
     getAgifyButton.addEventListener('click', () => {
       getResult('https://api.agify.io', 'agify');
