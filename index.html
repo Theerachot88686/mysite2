@@ -124,6 +124,15 @@
   </form>
   <div id="resultContainer"></div>
 
+  <div>
+    <canvas id="myChart"></canvas>
+  </div>
+
+  <canvas id="Chart" style="width:100%;max-width:600px"></canvas>
+  <div>
+    <canvas id="myChart2" width="794" height="397" style="display: block; box-sizing: border-box; height: 397px; width: 794px;"></canvas>
+  </div>
+
       <div class="w3-row">
         <div class="w3-col m6 w3-center w3-padding-large">
           <p><b><i class="fa fa-user w3-margin-right"></i>Theerachot Laothep</b></p><br>
@@ -246,7 +255,9 @@
       </div>
       <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-text-green">w3.css</a></p>
     </footer>
-     
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    
     <script>
     // Modal Image Gallery
     function onClick(element) {
@@ -346,7 +357,59 @@
     var resultContainer = document.getElementById('resultContainer');
     resultContainer.innerHTML = `<p>${fahrenheitTemperature.toFixed(2)} องศา Fahrenheit เท่ากับ ${celsiusTemperature.toFixed(2)} องศา Celsius</p>`;
   }
+  const ctx = document.getElementById('myChart');
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      datasets: [{
+        label: '# of Votes',
+        data: [12, 19, 3, 5, 2, 3],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+document.addEventListener('DOMContentLoaded', function() {
+      fetch('https://raw.githubusercontent.com/samayo/country-json/master/src/country-by-yearly-average-temperature.json')
+          .then(response => response.json())
+          .then(data => {
+              const countries = data.map(entry => entry.country);
+              const temperatures = data.map(entry => entry.temperature);
+
+              const ctx = document.getElementById('myChart2').getContext('2d');
+              new Chart(ctx, {
+                  type: 'line',
+                  data: {
+                      labels: countries,
+                      datasets: [{
+                          label: 'Temperature (°C) In World',
+                          data: temperatures,
+                          backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                          borderColor: 'rgba(85, 192, 192, 1)',
+                          borderWidth: 2
+                      }]
+                  },
+                  options: {
+                      scales: {
+                          y: {
+                              beginAtZero: true
+                          }
+                      }
+                  }
+              });
+          })
+          .catch(error => console.error('Error fetching data:', error));
+  });
+
     </script>
     
-    
+
     </body></html>
